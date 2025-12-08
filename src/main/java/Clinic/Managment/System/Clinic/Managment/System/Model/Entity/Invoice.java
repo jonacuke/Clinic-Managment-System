@@ -5,19 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name=”invoices”)
-public class Invoices {
+@Table(name = "invoices")
+public class Invoice {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    @JoinColumn(name=”appointment_id","nullable=false")
+    @JoinColumn(name="appointment_id")
     private Appointment appointment;
     private double total;
-    private Boolean isPaid;//per statusin paid/unpaid
+    private Boolean isPaid;//
 
-
+}
