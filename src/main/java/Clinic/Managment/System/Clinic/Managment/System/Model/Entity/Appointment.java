@@ -1,9 +1,13 @@
 package Clinic.Managment.System.Clinic.Managment.System.Model.Entity;
 
+
+
+import Clinic.Managment.System.Clinic.Managment.System.Model.Enums.appointmentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,43 +16,27 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="appointments")
-
-
+@Table(name = "appointments")
 public class Appointment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
-    @JoinColumn(name="doctor_id",nullable = false)
+    @JoinColumn(name="doctor_id",nullable=false)
     private Doctor doctor;
-
-
     @ManyToOne
-
-    @JoinColumn(name="patient_id",nullable = false)
-    private Patient patient;
-
+    @JoinColumn(name="patient_id",nullable=false)
+    private  Patient patient;
     @OneToOne
-    @JoinColumn(name="invoice_id",nullable = false)
+    @JoinColumn(name="invoice_id",nullable=false)
     private Invoice invoice;
-
-
-    @JoinColumn(name=”prescription_id,nullable=false)
+    @OneToOne
+    @JoinColumn(name = "prescription_id")
     private Prescription prescription;
-    private LocalDateTime created at;
+    private LocalDateTime createdAt;
     private LocalDate localdate;
     private String room;
     @Enumerated(EnumType.STRING)
-    private appoinmentStatus status;
-
-    @JoinColumn(name=”prescription_id,nullable=false)
-    private Prescription prescription;
-    private  LocalDateTime created at;
-    private LocalDate localdate;
-    private String room;
-    @Enumerated(EnumType.STRING)
-    private appoinmentStatus status;
+    private appointmentStatus status;
 
 }
