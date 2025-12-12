@@ -1,4 +1,3 @@
-
 package Clinic.Managment.System.Clinic.Managment.System.Service;
 
 import Clinic.Managment.System.Clinic.Managment.System.Model.Entity.User;
@@ -25,8 +24,24 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Metoda për regjistrimin e përdoruesit
     public User userRegistration(User user) {
+
+        if (user.getUserName() == null || user.getUserName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Username nuk mund të jetë bosh");
+        }
+
+        if (user.getLastName() == null || user.getLastName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Last Name nuk mund të jetë bosh");
+        }
+
+        if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+            throw new IllegalArgumentException("Email nuk mund të jetë bosh");
+        }
+
+        if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            throw new IllegalArgumentException("Password nuk mund të jetë bosh");
+        }
+
         if (user.getBirthday() == null) {
             throw new IllegalArgumentException("Birthday nuk mund të jetë null");
         }
@@ -45,26 +60,26 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // Merr të gjithë përdoruesit
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // Gjen përdoruesin sipas email
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    // Përditësim i të dhënave të përdoruesit
     public void updateUser(User user) {
-        User existing = userRepository.findById(user.getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+         User existing = userRepository.findById(user.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User me id " + user.getId() + " nuk ekziston"));
+
+        if (user.getUserName() == null || user.getUserName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Username nuk mund të jetë bosh");
+        }
 
         existing.setUserName(user.getUserName());
         existing.setLastName(user.getLastName());
         existing.setEmail(user.getEmail());
 
-        // Vetëm ndrysho password nëse është dhënë
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             existing.setPassword(passwordEncoder.encode(user.getPassword()));
         }
@@ -74,4 +89,5 @@ public class UserService {
 
         userRepository.save(existing);
     }
+
 }

@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class ClinicManagmentSystemApplication {
 
@@ -29,6 +31,8 @@ public class ClinicManagmentSystemApplication {
 				admin.setRole(Role.ADMIN);
 				admin.setEmail("admin@clinic.com");
 				admin.setLastName("System");
+				admin.setBirthday(LocalDate.of(1990, 1, 1));
+
 
 				userRepository.save(admin);
 
