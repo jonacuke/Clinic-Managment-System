@@ -16,8 +16,8 @@ public class Prescription {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name="prescription_id",nullable=false)
-    private Prescription prescription;
+    @JoinColumn(name="appointment_id",nullable=false)
+    private Appointment appointment;
     private String medicament;
     private double doza;
     private String instructions;

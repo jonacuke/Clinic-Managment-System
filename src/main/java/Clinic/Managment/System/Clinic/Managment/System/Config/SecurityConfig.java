@@ -32,9 +32,9 @@ public class SecurityConfig {
                         .requestMatchers("/dashboard","/payments/**").authenticated()
                         .anyRequest().authenticated()
                 )
-                .formLogin(login->login
+                .formLogin(form->form
                 .loginPage("/login")
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/perform_login")
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/dashboard",true)
