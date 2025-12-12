@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name=”prescriptions”)
-public class Prescriptions{
+@Table(name="prescriptions")
+
+public class Prescription {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name=”prescpription_id,nullable=false)
+    @JoinColumn(name="prescription_id",nullable=false)
     private Prescription prescription;
     private String medicament;
     private double doza;
@@ -31,5 +32,7 @@ public class Prescriptions{
 
 
 
-public class Prescription {
-}
+
+
+
+

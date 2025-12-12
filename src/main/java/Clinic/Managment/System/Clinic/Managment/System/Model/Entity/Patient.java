@@ -8,9 +8,10 @@ import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,7 +36,7 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @OneToMany
-    @JoinColumn(name=appointment_id,nullable=false)
-    private Appointment appointment;
+    @JoinColumn(name="appointment_id",nullable=false)
+    private List<Appointment> appointment;
 }
 
