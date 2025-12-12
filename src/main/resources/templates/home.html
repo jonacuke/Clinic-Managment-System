@@ -1,96 +1,147 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home - Clinic</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f8ff;
-            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Particle background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00c6ff, #007bff);
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
             display: flex;
+            justify-content: center;
+            align-items: center;
             flex-direction: column;
-        }
-        nav {
-            background: linear-gradient(90deg, #007bff, #6610f2);
-            padding: 1rem 2rem;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
-            animation: slideDown 0.6s ease forwards;
-        }
-        @keyframes slideDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-right: 2rem;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #ffdd57;
-        }
-        .container {
-            flex-grow: 1;
-            padding: 3rem 2rem;
-            animation: fadeInContent 1s ease forwards;
-            opacity: 0;
-        }
-        @keyframes fadeInContent {
-            0% {opacity: 0; transform: translateY(20px);}
-            100% {opacity: 1; transform: translateY(0);}
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 1rem;
-        }
-        p.lead {
-            font-size: 1.2rem;
-            color: #555;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            transition: background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-        .footer {
             text-align: center;
-            padding: 1rem 0;
-            color: #aaa;
-            border-top: 1px solid #ddd;
-            font-size: 0.9rem;
-            margin-top: auto;
+            color: white;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
+
+        /* Buttons */
+        .btn-hero {
+            width: 200px;
+            margin: 0.5rem;
+            padding: 0.8rem 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transform: skewX(-20deg);
+            transition: all 0.5s ease;
+        }
+
+        .btn-hero:hover::after {
+            left: 200%;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .btn-hero { width: 70%; }
         }
     </style>
 </head>
 <body>
-<nav>
-    <a th:href="@{/home}">Home</a>
-    <a th:href="@{/profile}">Profile</a>
-    <a th:href="@{/logout}">Logout</a>
-</nav>
 
-<div class="container">
-    <h1>Welcome to Clinic Management System</h1>
-    <p class="lead">Your one-stop solution for managing appointments, patients, and more.</p>
-    <button class="btn btn-primary">Get Started</button>
-</div>
+<!-- Particle Background -->
+<div id="particles-js"></div>
 
-<footer class="footer">
-    &copy; 2025 Clinic Management System. All rights reserved.
-</footer>
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Ekipi Profesional Mjekesor</h1>
+    <p>Diagnostifikim i Shpejte dhe i Sakte</p>
+    <div>
+        <a class="btn btn-light btn-hero" th:href="@{/login}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+        <a class="btn btn-warning btn-hero" th:href="@{/register}"><i class="bi bi-person-plus"></i> Register</a>
+    </div>
+</section>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    /* Initialize particles.js */
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {"value": 80},
+        "size": {"value": 3},
+        "move": {"speed": 2},
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "color": {"value": "#ffffff"}
+      },
+      "interactivity": {
+        "events": {
+          "onhover": {"enable": true, "mode": "repulse"}
+        }
+      }
+    });
+</script>
 </body>
 </html>

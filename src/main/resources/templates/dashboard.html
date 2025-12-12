@@ -8,44 +8,93 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f0f4f8;
+            background: linear-gradient(120deg, #e0f7fa, #f0f4f8);
+            min-height: 100vh;
         }
 
         .navbar {
-            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            background: linear-gradient(90deg, #36d1dc, #5b86e5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .navbar-brand {
             color: white !important;
-            font-weight: bold;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 1.5rem;
         }
 
-        .card-dashboard {
-            border-radius: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .btn-light {
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        .card-dashboard:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .card-body i {
-            font-size: 40px;
-            color: #5b86e5;
-        }
-
-        .card-title {
-            font-weight: bold;
+        .btn-light:hover {
+            transform: scale(1.05);
+            background: #ffffffcc;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .welcome {
-            animation: fadeInDown 1s ease;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease forwards;
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-dashboard {
+            border-radius: 25px;
+            overflow: hidden;
+            transition: transform 0.4s, box-shadow 0.4s;
+            cursor: pointer;
+            background: linear-gradient(145deg, #ffffff, #f0f4f8);
+        }
+
+        .card-dashboard:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.25);
+        }
+
+        .card-body i {
+            font-size: 50px;
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .card-dashboard:hover i {
+            transform: rotate(15deg) scale(1.2);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .card-text {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .row.g-4 {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            .card-body i { font-size: 40px; }
+            .card-title { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -61,7 +110,7 @@
 </nav>
 
 <div class="container mt-5">
-    <h2 class="welcome mb-4">Welcome to your Dashboard!</h2>
+    <h2 class="welcome">Welcome to your Dashboard!</h2>
     <div class="row g-4">
         <div class="col-md-4">
             <div class="card card-dashboard shadow p-3">
