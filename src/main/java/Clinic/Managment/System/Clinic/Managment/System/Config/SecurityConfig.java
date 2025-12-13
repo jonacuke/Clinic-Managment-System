@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static Clinic.Managment.System.Clinic.Managment.System.Model.Enums.Role.DOCTOR;
+
 @Configuration
 public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
@@ -28,6 +30,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth->auth
                 .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/doctor/**").hasRole("DOCTOR")
+                                .requestMatchers("/patient/**").hasRole("PATIENT")
                         .requestMatchers("/profile/**").authenticated()
                         .requestMatchers("/dashboard","/payments/**").authenticated()
                         .anyRequest().authenticated()

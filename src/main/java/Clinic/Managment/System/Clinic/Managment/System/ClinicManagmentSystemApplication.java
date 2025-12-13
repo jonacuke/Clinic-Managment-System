@@ -38,6 +38,17 @@ public class ClinicManagmentSystemApplication {
 
 				System.out.println("Admin account created: admin@clinic.com / admin123");
 			}
+			if(userRepository.findByEmail("doctor@clinic.com").isEmpty()){
+				User doctor = new User();
+				doctor.setUserName("Doctor");
+				doctor.setPassword(passwordEncoder.encode("doctor123"));
+				doctor.setRole(Role.DOCTOR); // sigurohu që Role.DOCTOR ekziston në Enum
+				doctor.setEmail("doctor@clinic.com");
+				doctor.setLastName("Smith");
+				doctor.setBirthday(LocalDate.of(1985, 5, 15));
+				userRepository.save(doctor);
+				System.out.println("Doctor account created: doctor@clinic.com / doctor123");
+			}
 		};
 	}
 }

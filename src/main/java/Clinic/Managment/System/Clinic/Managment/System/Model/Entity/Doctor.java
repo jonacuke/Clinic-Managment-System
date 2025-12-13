@@ -20,6 +20,9 @@ public class Doctor {
     private String  name;
     private String surname;
     private String specialization;
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private User user;
     @OneToMany(mappedBy="doctor")
     private List<Appointment> appointments;
 }

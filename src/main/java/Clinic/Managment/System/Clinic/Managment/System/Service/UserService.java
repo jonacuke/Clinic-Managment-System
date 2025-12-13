@@ -54,7 +54,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if (user.getRole() == null) {
-            user.setRole(Role.DOCTOR);
+            user.setRole(Role.PATIENT);
         }
 
         return userRepository.save(user);
