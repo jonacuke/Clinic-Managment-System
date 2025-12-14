@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,21 +22,26 @@ public class Patient {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank
     private String firstName;
+
     @NotBlank
     private String lastName;
+
     @Email
     @NotBlank
     private String email;
+
     @NotBlank
     private String password;
+
     @Past
     private LocalDate birthday;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @OneToMany
-    @JoinColumn(name="appointment_id",nullable=false)
-    private List<Appointment> appointment;
-}
 
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointments;
+}

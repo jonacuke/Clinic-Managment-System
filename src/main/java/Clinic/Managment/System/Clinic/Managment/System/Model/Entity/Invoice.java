@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "invoices")
+@Table(name="invoices")
+
 public class Invoice {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    @JoinColumn(name="appointment_id")
+    @JoinColumn(name="appointment_id",nullable=false)
     private Appointment appointment;
     private double total;
     private Boolean isPaid;//

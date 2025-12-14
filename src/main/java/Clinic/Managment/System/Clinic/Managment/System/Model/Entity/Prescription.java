@@ -10,12 +10,29 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="prescriptions")
-public class Prescription {
 
+public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name="appointment_id",nullable=false)
+    private Appointment appointment;
     private String medicament;
     private double doza;
     private String instructions;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
