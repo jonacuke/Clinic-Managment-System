@@ -24,34 +24,33 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomLoginSuccessHandler successHandler) throws Exception {
         http
-                .csrf(csrf->csrf.disable())
-                .authorizeHttpRequests(auth->auth
-                .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/doctor/**").hasRole("DOCTOR")
-                                .requestMatchers("/patient/**").hasRole("PATIENT")
+                        .requestMatchers("/doctor/**").hasRole("DOCTOR")
+                        .requestMatchers("/patient/**").hasRole("PATIENT")
                         .requestMatchers("/profile/**").authenticated()
                         .requestMatchers("/dashboard","/payments/**").authenticated()
                         .anyRequest().authenticated()
                 )
-                .formLogin(form->form
-                .loginPage("/login")
-                .loginProcessingUrl("/perform_login")
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/perform_login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/dashboard",true)
+                        .successHandler(successHandler)
                         .permitAll()
                 )
-                .logout(logout->logout
+                .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
 
-                return http.build();
-
+        return http.build();
     }
 
 }
