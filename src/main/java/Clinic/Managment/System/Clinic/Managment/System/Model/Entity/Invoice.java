@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,7 +20,6 @@ public class Invoice {
     @JoinColumn(name="appointment_id",nullable=false)
     private Appointment appointment;
     private double total;
-    private Boolean isPaid;//per statusin paid/unpaid
-
+    private Boolean isPaid;//
 
 }

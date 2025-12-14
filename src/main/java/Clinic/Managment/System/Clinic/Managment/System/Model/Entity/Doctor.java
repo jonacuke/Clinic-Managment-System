@@ -14,8 +14,9 @@ import java.util.List;
 @Entity
 @Table(name="doctors")
 public class Doctor {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String  name;
     private String surname;
@@ -26,4 +27,3 @@ public class Doctor {
     @OneToMany(mappedBy="doctor")
     private List<Appointment> appointments;
 }
-
