@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,7 +21,6 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
