@@ -1,7 +1,7 @@
 package Clinic.Managment.System.Clinic.Managment.System.Model.Enums;
 
-public enum AppointmentStatus {
 
+public enum AppointmentStatus {
     PENDING,      // Takimi është krijuar por ende jo i konfirmuar
     CONFIRMED,    // Takimi është konfirmuar
     IN_PROGRESS,  // Takimi është duke u zhvilluar
