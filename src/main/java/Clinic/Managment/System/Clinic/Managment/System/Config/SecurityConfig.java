@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/doctor/**").hasRole("DOCTOR")
-                                .requestMatchers("/patient/**").hasRole("PATIENT")
+                                .requestMatchers("/patient/**").hasRole("RECEPTIONIST")
                         .requestMatchers("/profile/**").authenticated()
                         .requestMatchers("/dashboard","/payments/**").authenticated()
                         .anyRequest().authenticated()
