@@ -42,7 +42,7 @@ public class ClinicManagmentSystemApplication {
 				User doctor = new User();
 				doctor.setUserName("Doctor");
 				doctor.setPassword(passwordEncoder.encode("doctor123"));
-				doctor.setRole(Role.DOCTOR); // sigurohu që Role.DOCTOR ekziston në Enum
+				doctor.setRole(Role.DOCTOR);
 				doctor.setEmail("doctor@clinic.com");
 				doctor.setLastName("Smith");
 				doctor.setBirthday(LocalDate.of(1985, 5, 15));

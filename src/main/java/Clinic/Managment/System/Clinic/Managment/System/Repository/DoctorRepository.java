@@ -8,4 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DoctorRepository extends JpaRepository<Doctor,Long> {
+    Optional<Doctor> findByUser(User user);
+    Optional<Doctor> findByUserId(Long userId);
+    boolean existsByUser(User user);
+    List<Doctor> findBySpecialization(String specialization);
 }

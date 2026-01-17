@@ -18,30 +18,24 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     public User userRegistration(User user) {
-
         if (user.getUserName() == null || user.getUserName().trim().isEmpty()) {
             throw new IllegalArgumentException("Username nuk mund të jetë bosh");
         }
-
         if (user.getLastName() == null || user.getLastName().trim().isEmpty()) {
             throw new IllegalArgumentException("Last Name nuk mund të jetë bosh");
         }
-
         if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
             throw new IllegalArgumentException("Email nuk mund të jetë bosh");
         }
-
         if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
             throw new IllegalArgumentException("Password nuk mund të jetë bosh");
         }
-
         if (user.getBirthday() == null) {
             throw new IllegalArgumentException("Birthday nuk mund të jetë null");
         }
@@ -52,12 +46,17 @@ public class UserService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         if (user.getRole() == null) {
             user.setRole(Role.PATIENT);
         }
-
         return userRepository.save(user);
+    }
+
+    // NDRYSHO KËTË METODË:
+    public User findByUsername(String username) {
+        // 'username' është në fakt email-i nga Spring Security
+        return userRepository.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User me email '" + username + "' nuk ekziston"));
     }
 
     public List<User> getAllUsers() {
@@ -69,7 +68,7 @@ public class UserService {
     }
 
     public void updateUser(User user) {
-         User existing = userRepository.findById(user.getId())
+        User existing = userRepository.findById(user.getId())
                 .orElseThrow(() -> new IllegalArgumentException("User me id " + user.getId() + " nuk ekziston"));
 
         if (user.getUserName() == null || user.getUserName().trim().isEmpty()) {
@@ -86,8 +85,6 @@ public class UserService {
 
         existing.setBirthday(user.getBirthday());
         existing.setRole(user.getRole());
-
         userRepository.save(existing);
     }
-
 }

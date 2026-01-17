@@ -8,18 +8,23 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import static Clinic.Managment.System.Clinic.Managment.System.Model.Enums.Role.DOCTOR;
 
 @Configuration
 public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
+    private final AuthenticationSuccessHandler successHandler;
 
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(CustomUserDetailsService userDetailsService,
+                          AuthenticationSuccessHandler successHandler) {
         this.userDetailsService = userDetailsService;
+        this.successHandler = successHandler;
     }
+
     @Bean
-    public PasswordEncoder  passwordEncoder(){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
@@ -28,20 +33,20 @@ public class SecurityConfig {
         http
                 .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth->auth
-                .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/doctor/**").hasRole("DOCTOR")
-                                .requestMatchers("/patient/**").hasRole("RECEPTIONIST")
+                        .requestMatchers("/doctor/**").hasRole("DOCTOR")
+                        .requestMatchers("/patient/**").hasRole("RECEPTIONIST")
                         .requestMatchers("/profile/**").authenticated()
                         .requestMatchers("/dashboard","/payments/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form->form
-                .loginPage("/login")
-                .loginProcessingUrl("/perform_login")
+                        .loginPage("/login")
+                        .loginProcessingUrl("/perform_login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/dashboard",true)
+                        .successHandler(successHandler)
                         .permitAll()
                 )
                 .logout(logout->logout
@@ -50,8 +55,7 @@ public class SecurityConfig {
                         .permitAll()
                 );
 
-                return http.build();
-
+        return http.build();
     }
 
 }
